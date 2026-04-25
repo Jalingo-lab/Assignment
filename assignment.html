@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #c0880f, #d9e4f5);
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .inline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .inline label {
+      margin: 0;
+      font-weight: normal;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #302f03, #0056b3);
+      border: none;
+      color: white;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background: #031f3a;
+      color: white;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    td {
+      border-bottom: 1px solid #eee;
+    }
+
+    tr:hover {
+      background: #f1f7ff;
+    }
+
+    caption {
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Modibbo Adama University of Technology, Yola</h2>
+    <h2>School of Pure and Applied Sciences</h2>
+    <h2>Department of Computer Science and Statistics</h2>
+    <h2>Student Registration Form</h2>
+
+    <div class="card">
+      <form id="schoolForm">
+
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" placeholder="Enter Full Name" name="fullname" required>
+        </div>
+
+        <div class="form-group">
+          <label for="school">School</label>
+          <input type="text" placeholder="Enter School Name" name="school" required>
+        </div>
+
+        <div class="form-group">
+          <label for="level">Level</label>
+          <input type="text" placeholder="Enter Your Level" name="level" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" placeholder="Enter Your Email Address" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" placeholder="Enter Your Password" name="password" required>
+        </div>
+
+        <div class="inline">
+          <input type="checkbox" name="terms" id="terms" required>
+          <label for="terms">I agree to Terms & Conditions</label>
+        </div>
+
+        <div class="form-group">
+          <label>Payment Method</label>
+          <div class="inline">
+            <input type="radio" name="paymentMethod" value="Cash" required> Cash
+            <input type="radio" name="paymentMethod" value="Card"> Card
+          </div>
+        </div>
+
+        <button type="submit">Register Student</button>
+
+      </form>
+    </div>
+
+    <div class="card">
+      <table id="schoolTable">
+        <caption>Registered CSC 500L Students</caption>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>School</th>
+            <th>Level</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Terms</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let id = 1;
+
+    const form = document.getElementById("schoolForm");
+    const tableBody = document.querySelector("#schoolTable tbody");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const { fullname, school, level, email, password, terms, paymentMethod } = form.elements;
+
+      let payment = "";
+      for (let option of paymentMethod) {
+        if (option.checked) payment = option.value;
+      }
+
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+      <td>${id++}</td>
+      <td>${fullname.value}</td>
+      <td>${school.value}</td>
+      <td>${level.value}</td>
+      <td>${email.value}</td>
+      <td>******</td>
+      <td>${terms.checked ? "Yes" : "No"}</td>
+      <td>${payment}</td>
+    `;
+
+      tableBody.appendChild(row);
+
+      form.reset();
+    });
+  </script>
+
+</body>
+
+</html>
