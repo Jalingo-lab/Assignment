@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oil & Gas HSE Intelligence Platform</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0d1b2a;
+            color: white;
+        }
+
+        .app {
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1b263b;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #ffb703;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #243b55;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .low {
+            color: lightgreen;
+        }
+
+        .medium {
+            color: yellow;
+        }
+
+        .high {
+            color: orange;
+        }
+
+        .critical {
+            color: red;
+            font-weight: bold;
+        }
+
+        .alert-box {
+            background: #ff4d4d;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .sensor-box {
+            background: #132238;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .map-box {
+            background: #132238;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <h1>🛢️ Oil & Gas HSE Intelligence Platform</h1>
+
+        <!-- REPORT FORM -->
+        <div class="card">
+            <h2>Report Industrial Hazard</h2>
+
+            <select id="type">
+                <option value="Gas Leak">Gas Leak</option>
+                <option value="Pipeline Corrosion">Pipeline Corrosion</option>
+                <option value="Pressure Build-up">Pressure Build-up</option>
+                <option value="Oil Spill">Oil Spill</option>
+                <option value="Equipment Failure">Equipment Failure</option>
+                <option value="Electrical Hazard">Electrical Hazard</option>
+                <option value="Fire Hazard">Fire Hazard</option>
+                <option value="Valve Failure">Valve Failure</option>
+                <option value="PPE Violation">PPE Violation</option>
+            </select>
+
+            <!-- Severity -->
+            <select id="severity">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Critical">Critical</option>
+            </select>
+
+            <input id="location" placeholder="Location (e.g. Offshore Rig A)">
+
+            <textarea id="desc" placeholder="Describe the industrial hazard..."></textarea>
+
+            <!-- GPS -->
+            <button onclick="getLocation()">📍 Detect GPS Location</button>
+            <div id="gps" class="map-box"></div>
+
+            <!-- Photo Upload -->
+            <input type="file" id="photo" accept="image/*">
+
+            <button onclick="submitReport()">Submit Incident</button>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="grid">
+
+            <!-- INCIDENT LOG -->
+            <div class="card">
+                <h2>📋 Incident Log</h2>
+                <ul id="log"></ul>
+            </div>
+
+            <!-- ANALYTICS -->
+            <div class="card">
+                <h2>📊 Risk Analytics Dashboard</h2>
+                <canvas id="riskChart"></canvas>
+            </div>
+
+            <!-- AI SUGGESTIONS -->
+            <div class="card">
+                <h2>🤖 AI Preventive Recommendations</h2>
+                <div id="suggestions"></div>
+            </div>
+
+            <!-- IoT -->
+            <div class="card">
+                <h2>🛰️ IoT Sensor Monitor</h2>
+                <div id="sensor" class="sensor-box"></div>
+            </div>
+
+            <!-- PREDICTIVE MAINTENANCE -->
+            <div class="card">
+                <h2>🔧 Predictive Maintenance Alerts</h2>
+                <div id="maintenance"></div>
+            </div>
+
+            <!-- ENVIRONMENT -->
+            <div class="card">
+                <h2>🌍 Environmental Monitoring</h2>
+                <div id="environment"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const log = document.getElementById("log");
+        const suggestions = document.getElementById("suggestions");
+        const gps = document.getElementById("gps");
+        const sensor = document.getElementById("sensor");
+        const maintenance = document.getElementById("maintenance");
+        const environment = document.getElementById("environment");
+
+        let incidentCounts = {
+            "Gas Leak": 0,
+            "Pipeline Corrosion": 0,
+            "Pressure Build-up": 0,
+            "Oil Spill": 0,
+            "Equipment Failure": 0,
+            "Electrical Hazard": 0,
+            "Fire Hazard": 0,
+            "Valve Failure": 0,
+            "PPE Violation": 0
+        };
+
+        // =========================
+        // SUBMIT INCIDENT
+        // =========================
+        function submitReport() {
+
+            const type = document.getElementById("type").value;
+            const severity = document.getElementById("severity").value;
+            const location = document.getElementById("location").value;
+            const desc = document.getElementById("desc").value;
+
+            const item = document.createElement("li");
+
+            item.innerHTML = `
+        <strong>${type}</strong><br>
+        Severity: <span class="${severity.toLowerCase()}">${severity}</span><br>
+        Location: ${location}<br>
+        Description: ${desc}
+    `;
+
+            log.prepend(item);
+
+            incidentCounts[type]++;
+            updateChart();
+
+            generateSuggestion(type);
+
+            if (severity === "Critical") {
+                triggerEmergency(type, location);
+            }
+
+            predictiveMaintenance(type);
+
+            environmentalImpact(type);
+
+            document.getElementById("desc").value = "";
+            document.getElementById("location").value = "";
+        }
+
+        // =========================
+        // AI PREVENTIVE RECOMMENDATIONS
+        // =========================
+        function generateSuggestion(type) {
+
+            let message = "";
+
+            switch (type) {
+
+                case "Gas Leak":
+                    message = "Evacuate workers immediately and isolate gas valves.";
+                    break;
+
+                case "Pipeline Corrosion":
+                    message = "Perform urgent pipeline integrity inspection.";
+                    break;
+
+                case "Pressure Build-up":
+                    message = "Inspect pressure release systems immediately.";
+                    break;
+
+                case "Oil Spill":
+                    message = "Deploy spill containment and environmental response team.";
+                    break;
+
+                case "Equipment Failure":
+                    message = "Run diagnostic checks and predictive maintenance.";
+                    break;
+
+                case "Electrical Hazard":
+                    message = "Disconnect power source before intervention.";
+                    break;
+
+                case "Fire Hazard":
+                    message = "Activate fire suppression system and evacuate area.";
+                    break;
+
+                case "Valve Failure":
+                    message = "Inspect valve pressure and emergency shutoff systems.";
+                    break;
+
+                case "PPE Violation":
+                    message = "Ensure all workers wear approved safety equipment.";
+                    break;
+            }
+
+            suggestions.innerHTML = `
+        <div class="alert-box">
+            ${message}
+        </div>
+    `;
+        }
+
+        // =========================
+        // CRITICAL ALERTS
+        // =========================
+        function triggerEmergency(type, location) {
+
+            alert(`🚨 CRITICAL ALERT!
+${type} detected at ${location}`);
+
+            console.log("Emergency response team notified.");
+        }
+
+        // =========================
+        // GPS TRACKING
+        // =========================
+        function getLocation() {
+
+            if (navigator.geolocation) {
+
+                navigator.geolocation.getCurrentPosition(position => {
+
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    gps.innerHTML = `
+                <strong>GPS Coordinates</strong><br>
+                Latitude: ${lat}<br>
+                Longitude: ${lon}
+            `;
+
+                });
+
+            } else {
+                gps.innerHTML = "GPS not supported.";
+            }
+        }
+
+        // =========================
+        // ANALYTICS DASHBOARD
+        // =========================
+        const ctx = document.getElementById('riskChart');
+
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(incidentCounts),
+                datasets: [{
+                    label: 'Incident Count',
+                    data: Object.values(incidentCounts)
+                }]
+            }
+        });
+
+        function updateChart() {
+
+            chart.data.datasets[0].data = Object.values(incidentCounts);
+            chart.update();
+        }
+
+        // =========================
+        // IoT SENSOR SIMULATION
+        // =========================
+        setInterval(() => {
+
+            const gasLevel = Math.floor(Math.random() * 100);
+            const temperature = Math.floor(Math.random() * 120);
+            const pressure = Math.floor(Math.random() * 300);
+
+            sensor.innerHTML = `
+        <p>⛽ Gas Level: ${gasLevel}%</p>
+        <p>🌡️ Temperature: ${temperature}°C</p>
+        <p>⚙️ Pressure: ${pressure} PSI</p>
+    `;
+
+            if (gasLevel > 80) {
+
+                alert("⚠️ Dangerous gas concentration detected!");
+
+                const item = document.createElement("li");
+
+                item.innerHTML = `
+            <strong>Automatic Sensor Alert</strong><br>
+            Gas concentration exceeded safety threshold.
+        `;
+
+                log.prepend(item);
+            }
+
+        }, 5000);
+
+        // =========================
+        // PREDICTIVE MAINTENANCE
+        // =========================
+        function predictiveMaintenance(type) {
+
+            if (
+                type === "Equipment Failure" ||
+                type === "Valve Failure" ||
+                type === "Pipeline Corrosion"
+            ) {
+
+                maintenance.innerHTML = `
+            <div class="alert-box">
+                Maintenance Recommended: Schedule inspection within 24 hours.
+            </div>
+        `;
+            }
+        }
+
+        // =========================
+        // ENVIRONMENTAL MONITORING
+        // =========================
+        function environmentalImpact(type) {
+
+            if (type === "Oil Spill" || type === "Gas Leak") {
+
+                environment.innerHTML = `
+            <div class="alert-box">
+                Environmental Risk Detected. Notify compliance authorities.
+            </div>
+        `;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

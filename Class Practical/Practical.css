@@ -1,0 +1,15 @@
+.Parent {
+    color: brown; 
+    background-color: rgb(82, 53, 16);
+    padding: 10px;
+}
+
+.Parent div {
+background-color: rgb(191, 233, 78);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+    
+    

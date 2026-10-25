@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oil & Gas Truck Registration</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Barlow:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ── RESET & VARIABLES ── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0e1117;
+            --surface: #161b26;
+            --surface-2: #1e2536;
+            --border: #2c3347;
+            --gold: #e8a020;
+            --gold-glow: rgba(232, 160, 32, 0.22);
+            --gold-dim: rgba(232, 160, 32, 0.10);
+            --text: #dde2ee;
+            --muted: #6b7494;
+            --danger: #e05252;
+            --danger-dim: rgba(224, 82, 82, 0.10);
+            --success: #3dba78;
+            --radius: 7px;
+            --shadow: 0 6px 28px rgba(0, 0, 0, 0.45);
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 36px 20px 60px;
+            background-image:
+                linear-gradient(rgba(232, 160, 32, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(232, 160, 32, 0.025) 1px, transparent 1px);
+            background-size: 44px 44px;
+        }
+
+        .wrapper {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* ── HEADER ── */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+            animation: fadeDown 0.45s ease both;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            font-size: 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: var(--gold);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .brand-name span {
+            color: var(--gold);
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .header-meta strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ── PAGE TITLE ── */
+        .page-title {
+            margin-bottom: 26px;
+            animation: fadeUp 0.45s ease 0.05s both;
+        }
+
+        .page-title h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .page-title h1 span {
+            color: var(--gold);
+        }
+
+        .page-title p {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-weight: 300;
+        }
+
+        /* ── STATS ── */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 26px;
+            animation: fadeUp 0.45s ease 0.1s both;
+        }
+
+        .stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px 18px;
+        }
+
+        .stat-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1.1;
+            margin-top: 2px;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            animation: fadeUp 0.45s ease both;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.22s;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--gold-glow);
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        /* ── FORM ── */
+        #truckForm {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 22px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            padding: 10px 13px;
+            background: var(--surface-2);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--muted);
+            opacity: 0.55;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+
+        input.error,
+        select.error {
+            border-color: var(--danger);
+            background: var(--danger-dim);
+        }
+
+        .err-msg {
+            font-size: 0.7rem;
+            color: var(--danger);
+            font-weight: 500;
+            display: none;
+        }
+
+        .err-msg.on {
+            display: block;
+        }
+
+        /* select arrow */
+        .sel-wrap {
+            position: relative;
+        }
+
+        .sel-wrap::after {
+            content: '▾';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            pointer-events: none;
+            font-size: 0.8rem;
+        }
+
+        .sel-wrap select {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* date input color fix */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.6) sepia(1) saturate(3) hue-rotate(5deg);
+            cursor: pointer;
+        }
+
+        /* ── BUTTON ── */
+        button[type="submit"] {
+            grid-column: 1 / -1;
+            padding: 13px;
+            background: var(--gold);
+            color: #0e1117;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            margin-top: 4px;
+        }
+
+        button[type="submit"]:hover {
+            background: #f0b535;
+            box-shadow: 0 4px 18px var(--gold-glow);
+            transform: translateY(-1px);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* ── TABLE ── */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 0.83rem;
+        }
+
+        caption {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            color: var(--muted);
+            padding-bottom: 12px;
+        }
+
+        thead tr {
+            border-bottom: 2px solid var(--gold);
+        }
+
+        th {
+            padding: 10px 13px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-align: left;
+            white-space: nowrap;
+            background: var(--surface-2);
+        }
+
+        td {
+            padding: 10px 13px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            color: var(--text);
+        }
+
+        tbody tr:nth-child(odd) td {
+            background: rgba(255, 255, 255, 0.018);
+        }
+
+        tbody tr:hover td {
+            background: var(--gold-dim);
+            transition: background 0.15s;
+        }
+
+        /* badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .b-crude {
+            background: rgba(232, 160, 32, 0.14);
+            color: var(--gold);
+            border: 1px solid rgba(232, 160, 32, 0.3);
+        }
+
+        .b-diesel {
+            background: rgba(61, 186, 120, 0.12);
+            color: var(--success);
+            border: 1px solid rgba(61, 186, 120, 0.28);
+        }
+
+        .b-petrol {
+            background: rgba(87, 155, 232, 0.12);
+            color: #57a8e8;
+            border: 1px solid rgba(87, 155, 232, 0.28);
+        }
+
+        .b-gas {
+            background: rgba(178, 112, 232, 0.12);
+            color: #b270e8;
+            border: 1px solid rgba(178, 112, 232, 0.28);
+        }
+
+        .b-active {
+            background: rgba(61, 186, 120, 0.12);
+            color: var(--success);
+            border: 1px solid rgba(61, 186, 120, 0.28);
+        }
+
+        /* row animation */
+        @keyframes rowIn {
+            from {
+                opacity: 0;
+                background: rgba(232, 160, 32, 0.15);
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .new-row td {
+            animation: rowIn 0.5s ease both;
+        }
+
+        /* empty state */
+        .empty {
+            text-align: center;
+            padding: 34px;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+
+        .empty span {
+            display: block;
+            font-size: 1.7rem;
+            margin-bottom: 7px;
+        }
+
+        /* ── TOAST ── */
+        #toast {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            background: var(--gold);
+            color: #0e1117;
+            padding: 11px 20px;
+            border-radius: var(--radius);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px var(--gold-glow);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 580px) {
+            #truckForm {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: 1;
+            }
+
+            button[type="submit"] {
+                grid-column: 1;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .header-meta {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <div class="brand-icon">🚛</div>
+                <div class="brand-name">Niger<span>Petro</span> Logistics</div>
+            </div>
+            <div class="header-meta">
+                <strong>Fleet Management System</strong><br>
+                Cargo Transport &amp; Distribution Division
+            </div>
+        </header>
+
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Truck <span>Registration</span> Portal</h1>
+            <p>Log and track all oil &amp; gas cargo vehicles entering or leaving operational sites.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Total Trucks</div>
+                <div class="stat-value" id="sTot">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Crude Oil</div>
+                <div class="stat-value" id="sCrude">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Diesel / Petrol</div>
+                <div class="stat-value" id="sFuel">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Gas</div>
+                <div class="stat-value" id="sGas">0</div>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="card">
+            <div class="card-head">
+                <div class="dot"></div>
+                <div class="card-title">New Truck Entry</div>
+            </div>
+
+            <form id="truckForm" novalidate>
+
+                <div class="field">
+                    <label for="truckNumber">Truck Number / Plate</label>
+                    <input type="text" id="truckNumber" placeholder="e.g. ABC-123-XY" />
+                    <span class="err-msg" id="e-truck">Truck number is required.</span>
+                </div>
+
+                <div class="field">
+                    <label for="driverName">Driver Name</label>
+                    <input type="text" id="driverName" placeholder="e.g. Emeka Okafor" />
+                    <span class="err-msg" id="e-driver">Driver name is required.</span>
+                </div>
+
+                <div class="field">
+                    <label for="company">Company / Operator</label>
+                    <input type="text" id="company" placeholder="e.g. NNPC, Shell, TotalEnergies" />
+                    <span class="err-msg" id="e-company">Company name is required.</span>
+                </div>
+
+                <div class="field">
+                    <label for="cargoType">Cargo Type</label>
+                    <div class="sel-wrap">
+                        <select id="cargoType">
+                            <option value="">— Select Cargo —</option>
+                            <option value="Crude Oil">Crude Oil</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="Gas">Gas</option>
+                        </select>
+                    </div>
+                    <span class="err-msg" id="e-cargo">Please select a cargo type.</span>
+                </div>
+
+                <div class="field full">
+                    <label for="date">Registration Date</label>
+                    <input type="date" id="date" />
+                    <span class="err-msg" id="e-date">Registration date is required.</span>
+                </div>
+
+                <button type="submit">⊕ &nbsp; Register Truck</button>
+
+            </form>
+        </div>
+
+        <!-- Table Card -->
+        <div class="card">
+            <div class="card-head">
+                <div class="dot"></div>
+                <div class="card-title">Registered Trucks</div>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <caption>NigerPetro Logistics — Active Fleet Records</caption>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Truck No.</th>
+                            <th>Driver</th>
+                            <th>Company</th>
+                            <th>Cargo</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="truckList">
+                        <tr id="emptyRow">
+                            <td colspan="7" class="empty">
+                                <span>🛢️</span>
+                                No trucks registered yet. Use the form above to add a record.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div><!-- /wrapper -->
+
+    <div id="toast">✓ &nbsp; Truck Registered</div>
+
+    <script>
+        const form = document.getElementById("truckForm");
+        const tbody = document.getElementById("truckList");
+
+        // ── Cargo badge class
+        function badgeClass(cargo) {
+            const map = { "Crude Oil": "b-crude", "Diesel": "b-diesel", "Petrol": "b-petrol", "Gas": "b-gas" };
+            return map[cargo] || "b-active";
+        }
+
+        // ── Set / clear error on a field
+        function setErr(inputId, msgId, show) {
+            const el = document.getElementById(inputId);
+            const msg = document.getElementById(msgId);
+            if (show) { el.classList.add("error"); msg.classList.add("on"); }
+            else { el.classList.remove("error"); msg.classList.remove("on"); }
+        }
+
+        // ── Validate all fields
+        function validate() {
+            const truck = document.getElementById("truckNumber").value.trim();
+            const driver = document.getElementById("driverName").value.trim();
+            const company = document.getElementById("company").value.trim();
+            const cargo = document.getElementById("cargoType").value;
+            const date = document.getElementById("date").value;
+
+            setErr("truckNumber", "e-truck", !truck);
+            setErr("driverName", "e-driver", !driver);
+            setErr("company", "e-company", !company);
+            setErr("cargoType", "e-cargo", !cargo);
+            setErr("date", "e-date", !date);
+
+            return truck && driver && company && cargo && date;
+        }
+
+        // ── Toast
+        function showToast() {
+            const t = document.getElementById("toast");
+            t.classList.add("show");
+            setTimeout(() => t.classList.remove("show"), 2800);
+        }
+
+        // ── Rebuild stats from the trucks array
+        function updateStats(trucks) {
+            const counts = { "Crude Oil": 0, "Diesel": 0, "Petrol": 0, "Gas": 0 };
+            trucks.forEach(t => { if (counts[t.cargoType] !== undefined) counts[t.cargoType]++; });
+            document.getElementById("sTot").textContent = trucks.length;
+            document.getElementById("sCrude").textContent = counts["Crude Oil"];
+            document.getElementById("sFuel").textContent = counts["Diesel"] + counts["Petrol"];
+            document.getElementById("sGas").textContent = counts["Gas"];
+        }
+
+        // ── Render a single truck into the table (no animation by default)
+        function renderRow(truck, rowNum, animate) {
+            // Remove empty state row if still present
+            const empty = document.getElementById("emptyRow");
+            if (empty) empty.remove();
+
+            const row = tbody.insertRow();
+            if (animate) {
+                row.classList.add("new-row");
+                setTimeout(() => row.classList.remove("new-row"), 600);
+            }
+
+            row.insertCell(0).innerHTML = rowNum;
+            row.insertCell(1).innerHTML = truck.truckNumber;
+            row.insertCell(2).innerHTML = truck.driverName;
+            row.insertCell(3).innerHTML = truck.company;
+            row.insertCell(4).innerHTML = `<span class="badge ${badgeClass(truck.cargoType)}">${truck.cargoType}</span>`;
+            row.insertCell(5).innerHTML = truck.date;
+            row.insertCell(6).innerHTML = `<span class="badge b-active">Active</span>`;
+        }
+
+        // ── Re-draw entire table from localStorage (used on page load)
+        function displayTrucks() {
+            tbody.innerHTML = "";
+            const trucks = JSON.parse(localStorage.getItem("trucks")) || [];
+
+            if (trucks.length === 0) {
+                // Restore empty state row
+                tbody.innerHTML = `
+          <tr id="emptyRow">
+            <td colspan="7" class="empty">
+              <span>🛢️</span>
+              No trucks registered yet. Use the form above to add a record.
+            </td>
+          </tr>`;
+            } else {
+                trucks.forEach((truck, i) => renderRow(truck, i + 1, false));
+            }
+
+            updateStats(trucks);
+        }
+
+        // ── Form submit
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            if (!validate()) return;
+
+            const truckData = {
+                truckNumber: document.getElementById("truckNumber").value.trim(),
+                driverName: document.getElementById("driverName").value.trim(),
+                company: document.getElementById("company").value.trim(),
+                cargoType: document.getElementById("cargoType").value,
+                date: document.getElementById("date").value
+            };
+
+            // Save to localStorage
+            const trucks = JSON.parse(localStorage.getItem("trucks")) || [];
+            trucks.push(truckData);
+            localStorage.setItem("trucks", JSON.stringify(trucks));
+
+            // Add only the new row with animation (no full redraw)
+            renderRow(truckData, trucks.length, true);
+            updateStats(trucks);
+            showToast();
+            form.reset();
+        });
+
+        // ── Live clear errors
+        ["truckNumber", "driverName", "company"].forEach(fieldId => {
+            document.getElementById(fieldId).addEventListener("input", function () {
+                this.classList.remove("error");
+            });
+        });
+        ["cargoType", "date"].forEach(fieldId => {
+            document.getElementById(fieldId).addEventListener("change", function () {
+                this.classList.remove("error");
+            });
+        });
+
+        // ── Load saved trucks when the page opens
+        window.onload = displayTrucks;
+    </script>
+</body>
+
+</html>

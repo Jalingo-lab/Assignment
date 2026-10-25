@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        input,
+        button {
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Student Registration</h3>
+
+    Name <input type="text" id="name"><br>
+    School <input type="text" id="school"><br>
+    Level <input type="text" id="level"><br>
+    Email <input type="email" id="email"><br>
+    Password <input type="password" id="password"><br>
+
+    Accept T&C <input type="checkbox" id="terms"><br>
+
+    Select Payment Method <br>
+    Cash <input type="radio" name="payment" value="Cash">
+    Card <input type="radio" name="payment" value="Card"><br>
+
+    <button onclick="insertData()">Insert</button>
+    <button onclick="clearForm()">Clear</button>
+
+    <h3>List of CSC 300L students</h3>
+
+    <table id="studentTable">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>School</th>
+            <th>Level</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Terms</th>
+            <th>Payment Method</th>
+        </tr>
+    </table>
+
+    <script>
+        let id = 1;
+
+        function insertData() {
+            let name = document.getElementById("name").value;
+            let school = document.getElementById("school").value;
+            let level = document.getElementById("level").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let terms = document.getElementById("terms").checked ? "Yes" : "No";
+
+            let payment = document.querySelector('input[name="payment"]:checked');
+            payment = payment ? payment.value : "";
+
+            if (!name || !school || !level || !email || !password || !payment) {
+                alert("Please fill all fields");
+                return;
+            }
+
+            let table = document.getElementById("studentTable");
+            let row = table.insertRow();
+
+            row.insertCell(0).innerHTML = id++;
+            row.insertCell(1).innerHTML = name;
+            row.insertCell(2).innerHTML = school;
+            row.insertCell(3).innerHTML = level;
+            row.insertCell(4).innerHTML = email;
+            row.insertCell(5).innerHTML = password;
+            row.insertCell(6).innerHTML = terms;
+            row.insertCell(7).innerHTML = payment;
+
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById("name").value = "";
+            document.getElementById("school").value = "";
+            document.getElementById("level").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("terms").checked = false;
+
+            let radios = document.getElementsByName("payment");
+            radios.forEach(r => r.checked = false);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetroDrill Pro | Field Operations</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ffb700;
+      --dark: #0f172a;
+      --panel: #1e293b;
+      --text: #e2e8f0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(90deg, #000, #1e293b);
+      padding: 20px;
+      border-bottom: 3px solid var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ticker {
+      font-family: monospace;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: var(--panel);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      margin: 8px 0;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: white;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 12px;
+      background: var(--primary);
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 48%;
+    }
+
+    button.clear {
+      background: #ef4444;
+      color: white;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 12px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .money {
+      color: #22c55e;
+    }
+
+    .map-btn {
+      margin-top: 6px;
+      padding: 6px 10px;
+      width: auto;
+      background: #38bdf8;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>⚡ PetroDrill Dashboard</h1>
+    <div class="ticker">LIVE WTI: $94.40</div>
+  </header>
+
+  <div class="container">
+    <div class="grid">
+
+      <div class="card" style="grid-column: span 2;">
+        <h3>Real-Time Extraction (BBL)</h3>
+        <canvas id="chart"></canvas>
+      </div>
+
+      <div class="card">
+        <h3>Rig Control</h3>
+
+        <input id="wellName" placeholder="Rig Name">
+        <input id="production" type="number" placeholder="Production (BBL)">
+        <input id="latitude" type="number" placeholder="Latitude">
+        <input id="longitude" type="number" placeholder="Longitude">
+
+        <button onclick="addData()">+ Add</button>
+        <button class="clear" onclick="clearData()">Reset</button>
+      </div>
+
+      <div class="card">
+        <h3>Production Log</h3>
+        <ul id="list"></ul>
+
+        <div style="text-align:right; margin-top:10px;">
+          Total Revenue: <strong id="totalRev">$0</strong>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <button onclick="exportCSV()">Export CSV</button>
+          <button onclick="exportExcel()">Export Excel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const OIL_PRICE = 94.40;
+    let wells = JSON.parse(localStorage.getItem('petroData')) || [];
+
+    // Fix old data missing timestamp
+    wells = wells.map(w => ({
+      ...w,
+      time: w.time || new Date().toLocaleString()
+    }));
+
+    const ctx = document.getElementById('chart').getContext('2d');
+
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: [], datasets: [{ data: [] }] }
+    });
+
+    function updateUI() {
+      chart.data.labels = wells.map(w => w.name);
+      chart.data.datasets[0].data = wells.map(w => w.value);
+      chart.update();
+
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+
+      let total = 0;
+
+      wells.forEach(w => {
+        const revenue = w.value * OIL_PRICE;
+        total += revenue;
+
+        const li = document.createElement('li');
+
+        li.innerHTML = `
+      <div>
+        <strong>${w.name}</strong><br>
+        📍 ${w.lat}, ${w.lon}<br>
+        🕒 ${w.time}<br>
+
+        <button class="map-btn" onclick="openMap(${w.lat}, ${w.lon})">
+          View Map
+        </button>
+      </div>
+
+      <div>
+        ${w.value} bbl<br>
+        <span class="money">$${revenue.toLocaleString()}</span>
+      </div>
+    `;
+
+        list.appendChild(li);
+      });
+
+      document.getElementById('totalRev').textContent =
+        "$" + total.toLocaleString();
+
+      localStorage.setItem('petroData', JSON.stringify(wells));
+    }
+
+    function addData() {
+      const name = wellName.value;
+      const value = production.value;
+      const lat = latitude.value;
+      const lon = longitude.value;
+
+      if (name && value && lat && lon) {
+        wells.push({
+          name,
+          value: Number(value),
+          lat: Number(lat),
+          lon: Number(lon),
+          time: new Date().toLocaleString()
+        });
+
+        updateUI();
+
+        wellName.value = production.value = latitude.value = longitude.value = '';
+      }
+    }
+
+    function clearData() {
+      if (confirm("Clear all data?")) {
+        wells = [];
+        updateUI();
+      }
+    }
+
+    function openMap(lat, lon) {
+      window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
+    }
+
+    // CSV Export
+    function exportCSV() {
+      let csv = "Name,Production,Lat,Lon,Date Time,Revenue\n";
+
+      wells.forEach(w => {
+        csv += `${w.name},${w.value},${w.lat},${w.lon},${w.time},${(w.value * OIL_PRICE).toFixed(2)}\n`;
+      });
+
+      const blob = new Blob([csv]);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = "petrodrill_data.csv";
+      a.click();
+    }
+
+    // Excel Export
+    function exportExcel() {
+      const data = wells.map(w => ({
+        Name: w.name,
+        Production: w.value,
+        Latitude: w.lat,
+        Longitude: w.lon,
+        "Date Time": w.time,
+        Revenue: (w.value * OIL_PRICE).toFixed(2)
+      }));
+
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+
+      XLSX.utils.book_append_sheet(wb, ws, "Production");
+      XLSX.writeFile(wb, "petrodrill_data.xlsx");
+    }
+
+    // GPS autofill
+    navigator.geolocation.getCurrentPosition(pos => {
+      latitude.value = pos.coords.latitude;
+      longitude.value = pos.coords.longitude;
+    });
+
+    updateUI();
+  </script>
+
+</body>
+
+</html>

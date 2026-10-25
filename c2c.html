@@ -1,0 +1,3224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>C2C Sport Center Jalingo | Sports, Fitness, Food & Entertainment</title>
+
+  <meta
+    name="description"
+    content="C2C Sport Center Jalingo offers football, swimming, gym, events, cinema, restaurant, children's playground, snooker, table tennis, car wash and more."
+  />
+
+  <meta
+    name="keywords"
+    content="C2C Sport Center Jalingo, football Jalingo, swimming Jalingo, gym Jalingo, event center Jalingo, restaurant Jalingo"
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #17202a;
+      background: #ffffff;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    :root {
+      --green: #08783e;
+      --green-dark: #04552d;
+      --green-light: #18b865;
+      --blue: #0866c6;
+      --blue-light: #29a9ff;
+      --orange: #ff7417;
+      --yellow: #ffc928;
+      --red: #e53935;
+      --dark: #071b2d;
+      --dark-2: #0d2a40;
+      --white: #ffffff;
+      --light: #f5f9fc;
+      --gray: #6d7a86;
+      --border: #e5edf2;
+      --shadow: 0 20px 55px rgba(5, 35, 58, 0.12);
+      --radius: 22px;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    .section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 55px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      background: #e8f8ef;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 18px;
+      font-weight: 900;
+    }
+
+    .section-heading p {
+      color: var(--gray);
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      font-weight: 700;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 12px 28px rgba(8, 120, 62, 0.25);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 18px 35px rgba(8, 120, 62, 0.35);
+    }
+
+    .btn-outline {
+      color: var(--green);
+      border-color: var(--green);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      color: #fff;
+      background: var(--green);
+    }
+
+    /* =========================================================
+       HEADER / NAVIGATION
+    ========================================================= */
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: max-content;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 8px 20px rgba(8, 102, 198, 0.25);
+      font-size: 20px;
+    }
+
+    .logo-text strong {
+      display: block;
+      color: var(--dark);
+      font-size: 18px;
+      line-height: 1.1;
+      font-weight: 900;
+    }
+
+    .logo-text span {
+      display: block;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: #334454;
+      font-size: 13px;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      background: var(--green);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-book {
+      color: #fff !important;
+      padding: 11px 18px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      box-shadow: 0 8px 20px rgba(255, 116, 23, 0.2);
+    }
+
+    .nav-book::after {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 82px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      color: #fff;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(3, 19, 30, 0.94) 0%,
+          rgba(3, 19, 30, 0.78) 42%,
+          rgba(3, 19, 30, 0.35) 100%
+        ),
+        url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2000&q=90")
+          center/cover;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      right: -220px;
+      top: -200px;
+      background: rgba(41, 169, 255, 0.16);
+      filter: blur(5px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      left: -250px;
+      bottom: -300px;
+      background: rgba(24, 184, 101, 0.18);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+      padding: 90px 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 100px;
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 22px;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero-badge i {
+      color: var(--yellow);
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6.4rem);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(
+        90deg,
+        #50e69b,
+        #54c5ff,
+        #ffd452
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 690px;
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.84);
+      margin-bottom: 30px;
+      animation: fadeUp 1.2s ease forwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-bottom: 40px;
+      animation: fadeUp 1.4s ease forwards;
+    }
+
+    .hero .btn-outline {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero .btn-outline:hover {
+      color: var(--dark);
+      background: #fff;
+    }
+
+    .hero-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      animation: fadeUp 1.6s ease forwards;
+    }
+
+    .hero-feature {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 14px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(10px);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .hero-feature i {
+      color: var(--yellow);
+    }
+
+    .scroll-down {
+      position: absolute;
+      z-index: 3;
+      right: 5%;
+      bottom: 30px;
+      writing-mode: vertical-rl;
+      font-size: 10px;
+      letter-spacing: 2px;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about {
+      background: #fff;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+      min-height: 540px;
+    }
+
+    .about-main-img {
+      width: 82%;
+      height: 470px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-main-img img {
+      height: 100%;
+      transition: 0.6s;
+    }
+
+    .about-main-img:hover img {
+      transform: scale(1.06);
+    }
+
+    .about-small-img {
+      position: absolute;
+      width: 45%;
+      height: 220px;
+      right: 0;
+      bottom: 0;
+      border: 10px solid #fff;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-small-img img {
+      height: 100%;
+    }
+
+    .about-experience {
+      position: absolute;
+      top: 35px;
+      right: 2%;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      color: #fff;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(229, 57, 53, 0.25);
+      text-align: center;
+    }
+
+    .about-experience strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .about-experience span {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .about-content .section-tag {
+      margin-bottom: 15px;
+    }
+
+    .about-content h2 {
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .about-content > p {
+      color: var(--gray);
+      margin-bottom: 25px;
+    }
+
+    .mission-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 28px;
+    }
+
+    .mv-card {
+      padding: 20px;
+      background: var(--light);
+      border-radius: 17px;
+      border-left: 4px solid var(--green);
+    }
+
+    .mv-card h4 {
+      margin-bottom: 7px;
+      color: var(--dark);
+    }
+
+    .mv-card p {
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 17px 8px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--green);
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .stat span {
+      color: var(--gray);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       SERVICES
+    ========================================================= */
+
+    .services {
+      background:
+        radial-gradient(circle at 10% 20%, rgba(24, 184, 101, 0.08), transparent 28%),
+        radial-gradient(circle at 90% 80%, rgba(41, 169, 255, 0.1), transparent 28%),
+        var(--light);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+      border-radius: 20px;
+      padding: 27px 22px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(7, 27, 45, 0.05);
+      transition: 0.4s ease;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      right: -55px;
+      top: -55px;
+      border-radius: 50%;
+      background: var(--card-color, var(--green));
+      opacity: 0.1;
+      transition: 0.4s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-9px);
+      box-shadow: var(--shadow);
+      border-color: transparent;
+    }
+
+    .service-card:hover::before {
+      transform: scale(2.5);
+      opacity: 0.14;
+    }
+
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--icon-bg, #e8f8ef);
+      color: var(--card-color, var(--green));
+      font-size: 23px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+
+    .service-card:hover .service-icon {
+      transform: rotate(-5deg) scale(1.1);
+    }
+
+    .service-card h3 {
+      color: var(--dark);
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      color: var(--gray);
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .service-link {
+      color: var(--card-color, var(--green));
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       FACILITIES
+    ========================================================= */
+
+    .facilities {
+      background: #fff;
+    }
+
+    .facility-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 260px;
+      gap: 17px;
+    }
+
+    .facility-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      min-height: 250px;
+    }
+
+    .facility-card.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .facility-card img {
+      height: 100%;
+      transition: 0.6s ease;
+    }
+
+    .facility-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .facility-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: #fff;
+      background: linear-gradient(
+        transparent 20%,
+        rgba(0, 0, 0, 0.82) 100%
+      );
+    }
+
+    .facility-overlay i {
+      font-size: 22px;
+      color: var(--yellow);
+      margin-bottom: 7px;
+    }
+
+    .facility-overlay h3 {
+      font-size: 20px;
+    }
+
+    .facility-overlay p {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    /* =========================================================
+       SPORTS SECTION
+    ========================================================= */
+
+    .sports {
+      color: #fff;
+      background:
+        linear-gradient(
+          100deg,
+          rgba(2, 24, 40, 0.95),
+          rgba(3, 75, 49, 0.88)
+        ),
+        url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1800&q=85")
+          center/cover fixed;
+    }
+
+    .sports-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .sports-content h2 {
+      font-size: clamp(2.3rem, 5vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .sports-content h2 span {
+      color: var(--yellow);
+    }
+
+    .sports-content p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 25px;
+    }
+
+    .sports-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .sports-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.07);
+      border-radius: 13px;
+      backdrop-filter: blur(10px);
+    }
+
+    .sports-item i {
+      color: var(--yellow);
+      font-size: 17px;
+    }
+
+    .sports-item span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .sports-visual {
+      position: relative;
+      height: 470px;
+    }
+
+    .sports-photo {
+      width: 88%;
+      height: 400px;
+      border-radius: 30px;
+      overflow: hidden;
+      margin-left: auto;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+    }
+
+    .sports-photo img {
+      height: 100%;
+    }
+
+    .sports-score {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      padding: 22px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .sports-score strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .sports-score span {
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       FOOD
+    ========================================================= */
+
+    .food {
+      background: #fff8f1;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .food-card {
+      background: #fff;
+      overflow: hidden;
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(104, 52, 16, 0.08);
+      transition: 0.4s;
+    }
+
+    .food-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(104, 52, 16, 0.15);
+    }
+
+    .food-image {
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .food-image img {
+      height: 100%;
+      transition: 0.5s;
+    }
+
+    .food-card:hover .food-image img {
+      transform: scale(1.08);
+    }
+
+    .food-body {
+      padding: 21px;
+    }
+
+    .food-body h3 {
+      color: var(--dark);
+      margin-bottom: 7px;
+    }
+
+    .food-body p {
+      color: var(--gray);
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .food-link {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       FAMILY
+    ========================================================= */
+
+    .family {
+      background:
+        linear-gradient(
+          120deg,
+          rgba(4, 35, 53, 0.9),
+          rgba(8, 120, 62, 0.8)
+        ),
+        url("https://images.unsplash.com/photo-1540479859555-17af45c78602?auto=format&fit=crop&w=1800&q=85")
+          center/cover;
+      color: #fff;
+    }
+
+    .family-content {
+      max-width: 760px;
+      text-align: center;
+      margin: auto;
+    }
+
+    .family-content .section-tag {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .family-content h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .family-content p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 30px;
+    }
+
+    .family-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .family-pill {
+      padding: 12px 17px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       EVENTS
+    ========================================================= */
+
+    .event-section {
+      padding: 100px 0;
+      background: var(--light);
+    }
+
+    .event-box {
+      position: relative;
+      overflow: hidden;
+      min-height: 490px;
+      display: flex;
+      align-items: center;
+      padding: 70px;
+      border-radius: 35px;
+      color: #fff;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(3, 20, 32, 0.94),
+          rgba(3, 20, 32, 0.52)
+        ),
+        url("https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1800&q=85")
+          center/cover;
+    }
+
+    .event-content {
+      max-width: 650px;
+    }
+
+    .event-content .section-tag {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .event-content h2 {
+      font-size: clamp(2.3rem, 5vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .event-content p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 20px;
+    }
+
+    .event-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 28px;
+    }
+
+    .event-types span {
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       GALLERY
+    ========================================================= */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 230px;
+      gap: 12px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 17px;
+    }
+
+    .gallery-item:nth-child(2),
+    .gallery-item:nth-child(6) {
+      grid-row: span 2;
+    }
+
+    .gallery-item:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      height: 100%;
+      transition: 0.5s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 40px 17px 17px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    }
+
+    /* =========================================================
+       WHY CHOOSE US
+    ========================================================= */
+
+    .why {
+      background: var(--light);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .why-card {
+      padding: 25px 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .why-card i {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      color: var(--green);
+      background: #e8f8ef;
+      font-size: 19px;
+    }
+
+    .why-card h3 {
+      font-size: 13px;
+      color: var(--dark);
+      line-height: 1.4;
+    }
+
+    /* =========================================================
+       CTA
+    ========================================================= */
+
+    .cta {
+      padding: 85px 0;
+      color: #fff;
+      text-align: center;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(80, 230, 155, 0.3), transparent 25%),
+        radial-gradient(circle at 80% 50%, rgba(84, 197, 255, 0.25), transparent 25%),
+        linear-gradient(135deg, var(--dark), #063e36);
+    }
+
+    .cta h2 {
+      font-size: clamp(2.3rem, 5vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 18px;
+      font-weight: 900;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 28px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact {
+      background: #fff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 17px;
+      color: var(--dark);
+    }
+
+    .contact-info > p {
+      color: var(--gray);
+      margin-bottom: 25px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .contact-icon {
+      min-width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--green);
+      background: #e8f8ef;
+    }
+
+    .contact-item strong {
+      display: block;
+      color: var(--dark);
+      font-size: 13px;
+    }
+
+    .contact-item span {
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 9px;
+    }
+
+    .socials a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--green);
+      background: #e8f8ef;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: #fff;
+      background: var(--green);
+      transform: translateY(-4px);
+    }
+
+    .contact-form {
+      padding: 35px;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 25px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      color: var(--dark);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      outline: none;
+      padding: 13px 14px;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--dark);
+      transition: 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(8, 120, 62, 0.08);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    /* =========================================================
+       LOCATION
+    ========================================================= */
+
+    .location-box {
+      margin-top: 25px;
+      height: 250px;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(
+          rgba(3, 27, 43, 0.85),
+          rgba(3, 27, 43, 0.85)
+        ),
+        url("https://images.unsplash.com/photo-1524666041070-9d87656c25bb?auto=format&fit=crop&w=1200&q=80")
+          center/cover;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    .location-pin {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      margin: auto;
+      border-radius: 50%;
+      background: var(--red);
+      font-size: 24px;
+      animation: pulse 2s infinite;
+    }
+
+    .location-box h3 {
+      margin-top: 10px;
+    }
+
+    .location-box p {
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      background: #041522;
+      color: #fff;
+      padding-top: 70px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 45px;
+      padding-bottom: 50px;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.58);
+      font-size: 12px;
+      max-width: 300px;
+      margin: 18px 0 20px;
+    }
+
+    .footer-logo .logo-text strong {
+      color: #fff;
+    }
+
+    .footer-title {
+      font-size: 14px;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.58);
+      font-size: 12px;
+      transition: 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--green-light);
+      padding-left: 4px;
+    }
+
+    .footer-contact {
+      display: grid;
+      gap: 13px;
+    }
+
+    .footer-contact div {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: rgba(255,255,255,0.58);
+      font-size: 11px;
+    }
+
+    .footer-contact i {
+      color: var(--green-light);
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgba(255,255,255,0.45);
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.6);
+      }
+
+      70% {
+        box-shadow: 0 0 0 20px rgba(229, 57, 53, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(229, 57, 53, 0);
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE DESIGN
+    ========================================================= */
+
+    @media (max-width: 1100px) {
+      .nav-links {
+        gap: 15px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute;
+        top: 82px;
+        left: 0;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 25px 5%;
+        background: #fff;
+        box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+      }
+
+      .nav-links a {
+        padding: 10px 0;
+      }
+
+      .nav-links .nav-book {
+        text-align: center;
+      }
+
+      /*
+        CSS-only mobile menu.
+        Clicking the label toggles the hidden checkbox.
+      */
+      .menu-toggle:checked ~ .nav-links {
+        display: flex;
+      }
+
+      .menu-label {
+        width: 45px;
+        height: 45px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: var(--light);
+        color: var(--dark);
+        cursor: pointer;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .about-grid,
+      .sports-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-images {
+        min-height: 500px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .facility-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sports-visual {
+        margin-top: 20px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .section {
+        padding: 70px 0;
+      }
+
+      .hero h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .hero-content {
+        padding: 70px 0 100px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .about-images {
+        min-height: 410px;
+      }
+
+      .about-main-img {
+        height: 370px;
+        width: 90%;
+      }
+
+      .about-small-img {
+        height: 170px;
+      }
+
+      .mission-vision {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid,
+      .food-grid,
+      .facility-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .facility-card.large {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .facility-grid {
+        grid-auto-rows: 260px;
+      }
+
+      .sports-list {
+        grid-template-columns: 1fr;
+      }
+
+      .sports-visual {
+        height: 350px;
+      }
+
+      .sports-photo {
+        width: 100%;
+        height: 310px;
+      }
+
+      .event-box {
+        padding: 40px 25px;
+        min-height: 500px;
+      }
+
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(6),
+      .gallery-item:nth-child(3) {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .gallery-grid {
+        grid-auto-rows: 260px;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .contact-form {
+        padding: 23px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .scroll-down {
+        display: none;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .logo-text strong {
+        font-size: 15px;
+      }
+
+      .logo-mark {
+        width: 42px;
+        height: 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+
+  <header class="header">
+    <div class="container nav">
+
+      <a href="#home" class="logo">
+        <div class="logo-mark">
+          <i class="fa-solid fa-futbol"></i>
+        </div>
+
+        <div class="logo-text">
+          <strong>C2C SPORT CENTER</strong>
+          <span>JALINGO • TARABA</span>
+        </div>
+      </a>
+
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+      <label for="menu-toggle" class="menu-label">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-book">Book Now</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero" id="home">
+
+      <div class="container">
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            <i class="fa-solid fa-star"></i>
+            Jalingo's Ultimate Sports & Leisure Destination
+          </div>
+
+          <h1>
+            Where <span>Sports</span>, Fun &
+            Entertainment Come Together.
+          </h1>
+
+          <p class="hero-description">
+            Experience sports, fitness, relaxation, entertainment,
+            delicious food and unforgettable moments — all in one
+            exciting destination in the heart of Jalingo.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#facilities" class="btn btn-primary">
+              <i class="fa-solid fa-compass"></i>
+              Explore Facilities
+            </a>
+
+            <a href="#events" class="btn btn-outline">
+              <i class="fa-solid fa-calendar-check"></i>
+              Book an Event
+            </a>
+          </div>
+
+          <div class="hero-features">
+            <div class="hero-feature">
+              <i class="fa-solid fa-futbol"></i>
+              Football
+            </div>
+
+            <div class="hero-feature">
+              <i class="fa-solid fa-person-swimming"></i>
+              Swimming
+            </div>
+
+            <div class="hero-feature">
+              <i class="fa-solid fa-dumbbell"></i>
+              Fitness
+            </div>
+
+            <div class="hero-feature">
+              <i class="fa-solid fa-film"></i>
+              Cinema
+            </div>
+
+            <div class="hero-feature">
+              <i class="fa-solid fa-utensils"></i>
+              Restaurant
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="scroll-down">
+        Scroll to explore ↓
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT
+    ====================================================== -->
+
+    <section class="section about" id="about">
+
+      <div class="container about-grid">
+
+        <div class="about-images">
+
+          <div class="about-main-img">
+            <img
+              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1000&q=85"
+              alt="Football at C2C Sport Center"
+            />
+          </div>
+
+          <div class="about-small-img">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=85"
+              alt="Fitness gym"
+            />
+          </div>
+
+          <div class="about-experience">
+            <strong>14+</strong>
+            <span>Facilities</span>
+          </div>
+
+        </div>
+
+
+        <div class="about-content">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-circle-info"></i>
+            About C2C
+          </div>
+
+          <h2>
+            More Than a Sports Center.
+            It's an Experience.
+          </h2>
+
+          <p>
+            C2C Sport Center Jalingo is a vibrant destination designed
+            to bring sports, fitness, recreation, entertainment and
+            hospitality together under one roof.
+          </p>
+
+          <p>
+            Whether you are looking to stay fit, enjoy a football
+            match, relax by the pool, organize an event, enjoy great
+            food or spend quality time with family and friends,
+            C2C Sport Center provides an exciting environment for
+            everyone.
+          </p>
+
+          <div class="mission-vision">
+
+            <div class="mv-card">
+              <h4>
+                <i class="fa-solid fa-bullseye"></i>
+                Our Mission
+              </h4>
+
+              <p>
+                To provide a safe, exciting and welcoming environment
+                where people can connect, stay active and have fun.
+              </p>
+            </div>
+
+            <div class="mv-card">
+              <h4>
+                <i class="fa-solid fa-eye"></i>
+                Our Vision
+              </h4>
+
+              <p>
+                To become a leading sports, recreation and
+                entertainment destination in Taraba State.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="stats">
+
+            <div class="stat">
+              <strong>14+</strong>
+              <span>Facilities</span>
+            </div>
+
+            <div class="stat">
+              <strong>100%</strong>
+              <span>Fun</span>
+            </div>
+
+            <div class="stat">
+              <strong>24/7</strong>
+              <span>Excitement</span>
+            </div>
+
+            <div class="stat">
+              <strong>1</strong>
+              <span>Destination</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section class="section services" id="services">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-grid-2"></i>
+            Our Services
+          </div>
+
+          <h2>
+            Something for Everyone
+          </h2>
+
+          <p>
+            From serious fitness and sports activities to relaxation,
+            delicious food and family entertainment, C2C has something
+            for everyone.
+          </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+          <article class="service-card" style="--card-color:#08783e;--icon-bg:#e8f8ef;">
+            <div class="service-icon">
+              <i class="fa-solid fa-futbol"></i>
+            </div>
+            <h3>Football Arena</h3>
+            <p>
+              Enjoy exciting football games in a dedicated sporting environment.
+            </p>
+            <a href="#contact" class="service-link">
+              Book Arena →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#0788d1;--icon-bg:#e7f6ff;">
+            <div class="service-icon">
+              <i class="fa-solid fa-person-swimming"></i>
+            </div>
+            <h3>Swimming Pool</h3>
+            <p>
+              Cool off, relax and enjoy refreshing swimming sessions.
+            </p>
+            <a href="#contact" class="service-link">
+              Learn More →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#e53935;--icon-bg:#fff0f0;">
+            <div class="service-icon">
+              <i class="fa-solid fa-dumbbell"></i>
+            </div>
+            <h3>Gym & Fitness</h3>
+            <p>
+              Stay strong and active with our fitness facilities.
+            </p>
+            <a href="#contact" class="service-link">
+              Get Fit →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#ff7417;--icon-bg:#fff1e8;">
+            <div class="service-icon">
+              <i class="fa-solid fa-champagne-glasses"></i>
+            </div>
+            <h3>Event Center</h3>
+            <p>
+              Host memorable celebrations, meetings and special occasions.
+            </p>
+            <a href="#events" class="service-link">
+              Book Event →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#7b42c7;--icon-bg:#f3ecff;">
+            <div class="service-icon">
+              <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+            </div>
+            <h3>Table Tennis</h3>
+            <p>
+              Challenge your friends and sharpen your skills.
+            </p>
+            <a href="#contact" class="service-link">
+              Play Now →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#ff9f00;--icon-bg:#fff8df;">
+            <div class="service-icon">
+              <i class="fa-solid fa-child-reaching"></i>
+            </div>
+            <h3>Children's Playground</h3>
+            <p>
+              A fun-filled environment where children can play and explore.
+            </p>
+            <a href="#contact" class="service-link">
+              Explore →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#0866c6;--icon-bg:#eaf4ff;">
+            <div class="service-icon">
+              <i class="fa-solid fa-billiards"></i>
+            </div>
+            <h3>Snooker</h3>
+            <p>
+              Relax and enjoy competitive snooker sessions with friends.
+            </p>
+            <a href="#contact" class="service-link">
+              Play Snooker →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#e91e63;--icon-bg:#ffedf4;">
+            <div class="service-icon">
+              <i class="fa-solid fa-film"></i>
+            </div>
+            <h3>Cinema</h3>
+            <p>
+              Enjoy movies and entertainment in a comfortable environment.
+            </p>
+            <a href="#contact" class="service-link">
+              Explore →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#d35400;--icon-bg:#fff0e7;">
+            <div class="service-icon">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <h3>Restaurant</h3>
+            <p>
+              Enjoy delicious meals and refreshing dishes.
+            </p>
+            <a href="#contact" class="service-link">
+              View Menu →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#9b6a21;--icon-bg:#fff8e9;">
+            <div class="service-icon">
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <h3>Tea Lounge</h3>
+            <p>
+              Relax with a warm cup of tea and good company.
+            </p>
+            <a href="#contact" class="service-link">
+              Relax →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#ff4b8b;--icon-bg:#fff0f6;">
+            <div class="service-icon">
+              <i class="fa-solid fa-ice-cream"></i>
+            </div>
+            <h3>Ice Cream</h3>
+            <p>
+              Treat yourself to delicious and refreshing ice cream.
+            </p>
+            <a href="#contact" class="service-link">
+              Treat Yourself →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#ff5a1f;--icon-bg:#fff0ea;">
+            <div class="service-icon">
+              <i class="fa-solid fa-burger"></i>
+            </div>
+            <h3>Shawarma</h3>
+            <p>
+              Enjoy freshly prepared and delicious shawarma.
+            </p>
+            <a href="#contact" class="service-link">
+              Order →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#008b8b;--icon-bg:#e8ffff;">
+            <div class="service-icon">
+              <i class="fa-solid fa-car"></i>
+            </div>
+            <h3>Car Wash</h3>
+            <p>
+              Keep your vehicle clean while you enjoy the center.
+            </p>
+            <a href="#contact" class="service-link">
+              Visit →
+            </a>
+          </article>
+
+
+          <article class="service-card" style="--card-color:#08783e;--icon-bg:#e8f8ef;">
+            <div class="service-icon">
+              <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <h3>Other Recreation</h3>
+            <p>
+              Discover more activities and entertainment options.
+            </p>
+            <a href="#contact" class="service-link">
+              Discover →
+            </a>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FACILITIES
+    ====================================================== -->
+
+    <section class="section facilities" id="facilities">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-building"></i>
+            Our Facilities
+          </div>
+
+          <h2>
+            Everything You Need in One Place
+          </h2>
+
+          <p>
+            Come for one activity or spend the entire day enjoying
+            everything C2C Sport Center has to offer.
+          </p>
+
+        </div>
+
+
+        <div class="facility-grid">
+
+          <div class="facility-card large">
+            <img
+              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=85"
+              alt="Football Arena"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-futbol"></i>
+              <h3>Football Arena</h3>
+              <p>Play. Compete. Enjoy.</p>
+            </div>
+          </div>
+
+
+          <div class="facility-card">
+            <img
+              src="https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?auto=format&fit=crop&w=900&q=85"
+              alt="Swimming Pool"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-person-swimming"></i>
+              <h3>Swimming Pool</h3>
+              <p>Refresh and relax.</p>
+            </div>
+          </div>
+
+
+          <div class="facility-card">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=85"
+              alt="Gym"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-dumbbell"></i>
+              <h3>Modern Gym</h3>
+              <p>Train stronger.</p>
+            </div>
+          </div>
+
+
+          <div class="facility-card">
+            <img
+              src="https://images.unsplash.com/photo-1544298621-35a989e20d24?auto=format&fit=crop&w=900&q=85"
+              alt="Snooker"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-circle-dot"></i>
+              <h3>Snooker Lounge</h3>
+              <p>Challenge your friends.</p>
+            </div>
+          </div>
+
+
+          <div class="facility-card">
+            <img
+              src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=85"
+              alt="Table Tennis"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+              <h3>Table Tennis</h3>
+              <p>Fast-paced fun.</p>
+            </div>
+          </div>
+
+
+          <div class="facility-card">
+            <img
+              src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=85"
+              alt="Cinema"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-film"></i>
+              <h3>Cinema</h3>
+              <p>Movies and entertainment.</p>
+            </div>
+          </div>
+
+
+          <div class="facility-card">
+            <img
+              src="https://images.unsplash.com/photo-1602030028438-4b1e9f0f6a3f?auto=format&fit=crop&w=900&q=85"
+              alt="Children playground"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-child"></i>
+              <h3>Kids Playground</h3>
+              <p>Fun for little ones.</p>
+            </div>
+          </div>
+
+
+          <div class="facility-card">
+            <img
+              src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85"
+              alt="Event Center"
+            />
+
+            <div class="facility-overlay">
+              <i class="fa-solid fa-champagne-glasses"></i>
+              <h3>Event Center</h3>
+              <p>Celebrate special moments.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SPORTS
+    ====================================================== -->
+
+    <section class="section sports">
+
+      <div class="container sports-grid">
+
+        <div class="sports-content">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-bolt"></i>
+            Sports & Fitness
+          </div>
+
+          <h2>
+            Stay Active.<br>
+            Stay Strong.<br>
+            Stay <span>C2C.</span>
+          </h2>
+
+          <p>
+            Whether you're a professional athlete, fitness enthusiast
+            or simply looking for an enjoyable way to stay active,
+            C2C gives you the space to move, compete and grow.
+          </p>
+
+          <div class="sports-list">
+
+            <div class="sports-item">
+              <i class="fa-solid fa-futbol"></i>
+              <span>Football</span>
+            </div>
+
+            <div class="sports-item">
+              <i class="fa-solid fa-person-swimming"></i>
+              <span>Swimming</span>
+            </div>
+
+            <div class="sports-item">
+              <i class="fa-solid fa-dumbbell"></i>
+              <span>Gym & Fitness</span>
+            </div>
+
+            <div class="sports-item">
+              <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+              <span>Table Tennis</span>
+            </div>
+
+            <div class="sports-item">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Competition</span>
+            </div>
+
+            <div class="sports-item">
+              <i class="fa-solid fa-person-running"></i>
+              <span>Recreation</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="sports-visual">
+
+          <div class="sports-photo">
+            <img
+              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1100&q=85"
+              alt="Sports at C2C"
+            />
+          </div>
+
+          <div class="sports-score">
+            <strong>LET'S GO!</strong>
+            <span>Train • Play • Compete</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOD
+    ====================================================== -->
+
+    <section class="section food">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-tag" style="color:#d35400;background:#fff0e7;">
+            <i class="fa-solid fa-utensils"></i>
+            Food & Refreshments
+          </div>
+
+          <h2>
+            Taste the C2C Experience
+          </h2>
+
+          <p>
+            Great activities deserve great food. Enjoy delicious meals,
+            snacks and refreshing treats while you relax.
+          </p>
+
+        </div>
+
+
+        <div class="food-grid">
+
+          <article class="food-card">
+
+            <div class="food-image">
+              <img
+                src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=800&q=85"
+                alt="Shawarma"
+              />
+            </div>
+
+            <div class="food-body">
+              <h3>Shawarma</h3>
+              <p>
+                Freshly prepared, tasty and perfect after a fun-filled day.
+              </p>
+
+              <a href="#contact" class="food-link">
+                Order Now →
+              </a>
+            </div>
+
+          </article>
+
+
+          <article class="food-card">
+
+            <div class="food-image">
+              <img
+                src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=85"
+                alt="Ice Cream"
+              />
+            </div>
+
+            <div class="food-body">
+              <h3>Ice Cream</h3>
+              <p>
+                Cool, creamy and delicious treats for every occasion.
+              </p>
+
+              <a href="#contact" class="food-link">
+                Treat Yourself →
+              </a>
+            </div>
+
+          </article>
+
+
+          <article class="food-card">
+
+            <div class="food-image">
+              <img
+                src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=85"
+                alt="Tea"
+              />
+            </div>
+
+            <div class="food-body">
+              <h3>Tea Lounge</h3>
+              <p>
+                Take a break, relax and enjoy a refreshing cup of tea.
+              </p>
+
+              <a href="#contact" class="food-link">
+                Relax →
+              </a>
+            </div>
+
+          </article>
+
+
+          <article class="food-card">
+
+            <div class="food-image">
+              <img
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=85"
+                alt="Restaurant"
+              />
+            </div>
+
+            <div class="food-body">
+              <h3>Restaurant</h3>
+              <p>
+                Enjoy delicious meals in a comfortable atmosphere.
+              </p>
+
+              <a href="#contact" class="food-link">
+                Explore Menu →
+              </a>
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FAMILY
+    ====================================================== -->
+
+    <section class="section family">
+
+      <div class="container">
+
+        <div class="family-content">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-heart"></i>
+            Family Experience
+          </div>
+
+          <h2>
+            Fun for the Whole Family
+          </h2>
+
+          <p>
+            Bring the family together for an exciting day filled with
+            games, sports, swimming, movies, delicious food and
+            unforgettable memories.
+          </p>
+
+          <div class="family-pills">
+
+            <span class="family-pill">
+              🛝 Children's Playground
+            </span>
+
+            <span class="family-pill">
+              🏊 Swimming
+            </span>
+
+            <span class="family-pill">
+              🎬 Cinema
+            </span>
+
+            <span class="family-pill">
+              🍽️ Food
+            </span>
+
+            <span class="family-pill">
+              🎮 Games
+            </span>
+
+            <span class="family-pill">
+              🎉 Family Events
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         EVENTS
+    ====================================================== -->
+
+    <section class="event-section" id="events">
+
+      <div class="container">
+
+        <div class="event-box">
+
+          <div class="event-content">
+
+            <div class="section-tag">
+              <i class="fa-solid fa-calendar-days"></i>
+              C2C Event Center
+            </div>
+
+            <h2>
+              Make Your Events Unforgettable.
+            </h2>
+
+            <p>
+              From intimate celebrations to large gatherings,
+              C2C provides an exciting venue for your special moments.
+            </p>
+
+            <div class="event-types">
+
+              <span>Weddings</span>
+              <span>Birthdays</span>
+              <span>Meetings</span>
+              <span>Corporate Events</span>
+              <span>Parties</span>
+              <span>Conferences</span>
+              <span>Social Gatherings</span>
+              <span>Private Celebrations</span>
+
+            </div>
+
+            <a href="#contact" class="btn btn-primary">
+              <i class="fa-solid fa-calendar-check"></i>
+              Book Our Event Center
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         GALLERY
+    ====================================================== -->
+
+    <section class="section" id="gallery">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-images"></i>
+            C2C Gallery
+          </div>
+
+          <h2>
+            See the C2C Experience
+          </h2>
+
+          <p>
+            A glimpse of the sports, entertainment, food and
+            experiences waiting for you.
+          </p>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1000&q=85"
+              alt="Football Arena"
+            />
+            <div class="gallery-caption">Football Arena</div>
+          </div>
+
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?auto=format&fit=crop&w=900&q=85"
+              alt="Swimming Pool"
+            />
+            <div class="gallery-caption">Swimming Pool</div>
+          </div>
+
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1100&q=85"
+              alt="Gym"
+            />
+            <div class="gallery-caption">Gym & Fitness</div>
+          </div>
+
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85"
+              alt="Event"
+            />
+            <div class="gallery-caption">Events</div>
+          </div>
+
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=85"
+              alt="Cinema"
+            />
+            <div class="gallery-caption">Cinema</div>
+          </div>
+
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1544298621-35a989e20d24?auto=format&fit=crop&w=900&q=85"
+              alt="Snooker"
+            />
+            <div class="gallery-caption">Snooker</div>
+          </div>
+
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=900&q=85"
+              alt="Food"
+            />
+            <div class="gallery-caption">Food & Refreshments</div>
+          </div>
+
+
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1602030028438-4b1e9f0f6a3f?auto=format&fit=crop&w=900&q=85"
+              alt="Children Playground"
+            />
+            <div class="gallery-caption">Children's Playground</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WHY CHOOSE C2C
+    ====================================================== -->
+
+    <section class="section why">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-medal"></i>
+            Why C2C?
+          </div>
+
+          <h2>
+            Why Choose C2C Sport Center?
+          </h2>
+
+          <p>
+            Everything is designed to make your visit enjoyable,
+            convenient and memorable.
+          </p>
+
+        </div>
+
+
+        <div class="why-grid">
+
+          <div class="why-card">
+            <i class="fa-solid fa-layer-group"></i>
+            <h3>Multiple Facilities in One Location</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-people-group"></i>
+            <h3>Family-Friendly Environment</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-star"></i>
+            <h3>Modern Recreational Facilities</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-person-running"></i>
+            <h3>Sports & Fitness Activities</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>Great Food & Refreshments</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-face-laugh-beam"></i>
+            <h3>Entertainment for All Ages</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>Event Hosting Facilities</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Convenient Jalingo Location</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-sparkles"></i>
+            <h3>Clean & Welcoming Environment</h3>
+          </div>
+
+          <div class="why-card">
+            <i class="fa-solid fa-heart"></i>
+            <h3>Fun-Filled Experience</h3>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="cta">
+
+      <div class="container">
+
+        <h2>
+          Ready to Have an Amazing Time?
+        </h2>
+
+        <p>
+          Come experience sports, entertainment, delicious food
+          and unforgettable moments at C2C Sport Center Jalingo.
+        </p>
+
+        <div class="cta-buttons">
+
+          <a href="#contact" class="btn btn-primary">
+            <i class="fa-solid fa-calendar-check"></i>
+            Book Now
+          </a>
+
+          <a href="#contact" class="btn btn-outline">
+            <i class="fa-solid fa-phone"></i>
+            Contact Us
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section class="section contact" id="contact">
+
+      <div class="container contact-grid">
+
+        <div class="contact-info">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-envelope"></i>
+            Get In Touch
+          </div>
+
+          <h2>
+            Let's Plan Your C2C Experience.
+          </h2>
+
+          <p>
+            Have a question, want to book a facility or organize
+            an event? Send us a message and we'll be happy to assist.
+          </p>
+
+
+          <div class="contact-list">
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+
+              <div>
+                <strong>Our Location</strong>
+                <span>
+                  No. 01 Audu Danburam Street, Opposite Headquarters,
+                  6 Brigade, Nigerian Army, Jalingo, Taraba State.
+                </span>
+              </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+
+              <div>
+                <strong>Phone</strong>
+                <span>+234 XXX XXX XXXX</span>
+              </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+
+              <div>
+                <strong>Email</strong>
+                <span>info@c2csportcenter.com</span>
+              </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+              <div class="contact-icon">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+
+              <div>
+                <strong>Opening Hours</strong>
+                <span>Opening hours to be updated</span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="socials">
+
+            <a href="#" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="#" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+
+            <a href="#" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+          </div>
+
+
+          <div class="location-box">
+
+            <div>
+
+              <div class="location-pin">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+
+              <h3>C2C Sport Center Jalingo</h3>
+
+              <p>
+                No. 01 Audu Danburam Street,
+                Opposite Headquarters, 6 Brigade
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <form class="contact-form">
+
+          <div class="section-tag">
+            <i class="fa-solid fa-paper-plane"></i>
+            Send a Message
+          </div>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+              />
+            </div>
+
+
+            <div class="form-group">
+              <label for="service">Service</label>
+
+              <select id="service">
+
+                <option value="">
+                  Select a service
+                </option>
+
+                <option>Football Arena</option>
+                <option>Swimming Pool</option>
+                <option>Gym</option>
+                <option>Event Center</option>
+                <option>Table Tennis</option>
+                <option>Snooker</option>
+                <option>Cinema</option>
+                <option>Restaurant</option>
+                <option>Children's Playground</option>
+                <option>Car Wash</option>
+                <option>Other</option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+              <label for="message">
+                Message
+              </label>
+
+              <textarea
+                id="message"
+                placeholder="Tell us how we can help you..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="form-group full">
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width:100%;border:none;"
+              >
+                <i class="fa-solid fa-paper-plane"></i>
+                Send Message
+              </button>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+
+          <a href="#home" class="logo footer-logo">
+
+            <div class="logo-mark">
+              <i class="fa-solid fa-futbol"></i>
+            </div>
+
+            <div class="logo-text">
+              <strong>C2C SPORT CENTER</strong>
+              <span>JALINGO • TARABA</span>
+            </div>
+
+          </a>
+
+          <p>
+            Sports, fitness, entertainment, food and family fun —
+            all in one exciting destination in Jalingo.
+          </p>
+
+          <div class="socials">
+
+            <a href="#" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="#" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+
+            <a href="#" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h3 class="footer-title">
+            Quick Links
+          </h3>
+
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#facilities">Facilities</a>
+            <a href="#gallery">Gallery</a>
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h3 class="footer-title">
+            Activities
+          </h3>
+
+          <div class="footer-links">
+            <a href="#services">Football</a>
+            <a href="#services">Swimming</a>
+            <a href="#services">Gym</a>
+            <a href="#services">Cinema</a>
+            <a href="#services">Restaurant</a>
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h3 class="footer-title">
+            Contact Us
+          </h3>
+
+          <div class="footer-contact">
+
+            <div>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>
+                No. 01 Audu Danburam Street,
+                Opposite Headquarters, 6 Brigade,
+                Nigerian Army, Jalingo, Taraba State.
+              </span>
+            </div>
+
+            <div>
+              <i class="fa-solid fa-phone"></i>
+              <span>+234 XXX XXX XXXX</span>
+            </div>
+
+            <div>
+              <i class="fa-solid fa-envelope"></i>
+              <span>info@c2csportcenter.com</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 C2C Sport Center Jalingo. All Rights Reserved.
+        </span>
+
+        <span>
+          Sports • Fitness • Entertainment • Food • Family
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>

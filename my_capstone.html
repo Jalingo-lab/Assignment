@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetroDrill Pro | Energy Intelligence Platform</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ffb700;
+      --accent: #f59e0b;
+      --dark: #020617;
+      --panel: rgba(30, 41, 59, 0.6);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #e5e7eb;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(circle at top, #020617, #000);
+      color: var(--text);
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.6);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+      color: var(--primary);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 100px 20px;
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+    }
+
+    .hero p {
+      opacity: 0.7;
+      font-size: 18px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 80px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+
+    h3 {
+      color: var(--primary);
+    }
+
+    /* INPUT */
+    input {
+      padding: 12px;
+      width: 100%;
+      margin: 8px 0;
+      background: #020617;
+      border: 1px solid #334155;
+      color: white;
+      border-radius: 6px;
+    }
+
+    /* BUTTON */
+    button {
+      padding: 12px;
+      width: 48%;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    button.clear {
+      background: #ef4444;
+      color: white;
+      float: right;
+    }
+
+    /* LIST */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 12px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">⚡ PetroDrill</div>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="my_dashboard.html">Dashboard</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="hero">
+      <h1>Powering the Future of Energy Intelligence</h1>
+      <p>
+        PetroDrill delivers advanced oilfield analytics, real-time drilling intelligence,
+        and production optimization solutions.
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="grid">
+
+        <div class="card">
+          <h3>Vision</h3>
+          <p>To revolutionize oil and gas operations through real-time data intelligence, enabling safer, smarter, and
+            more efficient drilling worldwide.</p>
+        </div>
+
+        <div class="card">
+          <h3>Mission</h3>
+          <p>To provide real-time oil drilling monitoring solutions that enhance operational efficiency, improve safety,
+            and support data-driven decision-making in the energy industry.</p>
+        </div>
+
+        <div class="card">
+          <h3>Core Values</h3>
+          <p>Innovation • Safety • Teamwork • Integrity • Accountability</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <h2>Our Services</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Drilling Analytics</h3>
+          <p>Improve drilling efficiency and reduce downtime.</p>
+        </div>
+
+        <div class="card">
+          <h3>Production Optimization</h3>
+          <p>Maximize output using real-time monitoring systems.</p>
+        </div>
+
+        <div class="card">
+          <h3>Field Intelligence</h3>
+          <p>Make smarter decisions with live operational data.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Email: [EMAIL_ADDRESS]</p>
+      <p>Address: 234 Petro Street, Vitoria Island, Lagos</p>
+      <p>Phone: +234 8069656330</p>
+    </div>
+  </section>
+
+
+</body>
+
+</html>

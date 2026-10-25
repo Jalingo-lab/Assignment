@@ -1,0 +1,178 @@
+:root {
+  --dark: #3e1348;
+  --darker: #2b0b2b;
+  --light: #e192de;
+  --shadow: #401844a4;
+  --text-color: #f3c1f1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Popins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #060b3d;
+  color: var(--text-color);
+
+  padding-top: 10vh; /* offset for fixed header */
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 10vh;
+  background-color: var(--darker);
+  padding: 0 20px;
+  box-shadow: 0 5px 10px var(--shadow);
+}
+
+#logo {
+  padding: 10px;
+  background-color: var(--light);
+  border-radius: 10px;
+  font-weight: bold;
+  color: var(--darker);
+  white-space: nowrap;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: var(--light);
+}
+nav a:active {
+  color: white;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: clamp(10px, 16px, 36px);
+  font-weight: 700;
+  color: var(--text-color);
+  text-decoration: none;
+  background: var(--dark);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0px 5px 5px var(--shadow);
+  cursor: pointer;
+  transition: box-shadow 0.5s ease;
+}
+
+.button:hover {
+  box-shadow: 0 0 3px 3px var(--light);
+}
+
+hr {
+  visibility: hidden;
+}
+
+.homeSection,
+.aboutSection {
+  width: 100%;
+  padding: 10px;
+  overflow: auto;
+}
+
+.profilePic {
+  width: 30%;
+  float: right;
+  margin: 10px;
+  border: 2px solid var(--dark);
+  border-radius: 40%;
+  box-shadow: 0 0 5px 1px var(--light);
+  animation: circleborder 5s 0.5s linear 3 reverse;
+}
+
+.aboutSection img {
+  filter: grayscale(1);
+  opacity: 0.3;
+}
+
+.aboutSection p {
+  max-width: 50%;
+  font-size: clamp(12px, 2vw, 56px);
+}
+
+.blogSection, .SkillSection {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+ 
+}
+
+.SkillSection div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blogSection img {
+  width: 350px;
+  border: 5px solid;
+  border-radius: 20px;
+}
+
+.SkillSection img{
+width: 50%;
+margin: 10px;
+border: #6d1b6a;
+border-radius: 10px;
+}
+
+.messageSection h1 {
+  text-align: center;
+}
+.messageForm {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+}
+.messageInput {
+  width: 40%;
+  padding: 10px;
+  border: 5px solid;
+  border-radius: 10px;
+  outline: none;
+  font-size: 20px;
+}
+.textarea {
+  resize: none;
+  min-height: 100%;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--darker);
+  padding: 20px;
+}
+
+.cert-slide {
+    vertical-align: middle;
+    margin: 0 15px;
+}
+
+.SkillSection div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

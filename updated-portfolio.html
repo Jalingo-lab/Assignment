@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <span id="logo">My Website</span>
+    <nav>
+      <a href="#home">About</a>
+      <a href="#about">Blog</a>
+      <a href="#skills">Skills</a>
+      <a href="#message">Contact</a>
+    </nav>
+    <button class="button">Logout</button>
+  </header>
+  <hr>
+  <!-- Hero Section -->
+  <section id="home" class="homeSection">
+    <img class="profilePic" src="jalingo.jpeg" alt="" width="200px">
+    <h1>Welcome to My Portfolio Website</h1>
+    <h2> I'am Abdulrazaq</h2>
+    <p>Software Developer Beginner</p>
+    <button class="button">Contact Me</button>
+  </section>
+  <hr>
+  <!-- About Section -->
+  <section id="about" class="aboutSection">
+    <img class="profilePic" src="jalingo.jpeg" alt="" width="200px">
+    <h1>About Me</h1>
+    <p class="aboutSuubtitle">Hello, I'm Abdulrazaq Usman Bobbohari. Welcome to my portfolio website. I am passionate
+      about creating responsive and user friendly website. My goal is to build webside that are not only visually
+      appealing but also functional and accessible to all users. Developing is fun, I love to learn, design, code,
+      troubleshoot and solve problems.
+    </p>
+  </section>
+  <hr>
+  <!-- Blog Post Section -->
+  <section id="blog" class="blogSection">
+    <h1>Blogs</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua.
+    </p>
+    <div>
+      <img src="Blog1.jpg.jpeg" alt="" width="200px">
+      <img src="Blog2.jpg.jpeg" alt="" width="200px">
+      <img src="Blog3.jpg.jpeg" alt="" width="200px">
+      <img src="Blog4.jpg.jpeg" alt="" width="200px">
+    </div>
+  </section>
+  <hr>
+  <!-- Skills Section -->
+  <section id="skills" class="SkillSection">
+    <h2>Skills</h2>
+    <div class="carousel-container">
+      <button class="button" onclick="changeSlide(-1)">Previous</button>
+
+      <img id="cert-slide" src="CAPM.jpg.jpeg" alt="CAPM" width="320px">
+
+      <button class="button" onclick="changeSlide(1)">Next</button>
+    </div>
+  </section>
+  <hr>
+  <!-- Contact Section -->
+  <section id="message" class="messageSection">
+    <h1>Wanna say hello?</h1>
+    <form class="messageForm" accept="POST">
+      <input class="messageInput" type="text" placeholder="name" name="name" />
+      <input class="messageInput" type="email" placeholder="Email" name="email" />
+      <textarea class="messageInput" placeholder="Write message here." name="message" spellcheck="true"></textarea>
+      <br>
+      <input class="button" type="submit" value="Send" name="send-button" /><br>
+    </form>
+  </section>
+
+  <hr>
+  <!-- Footer -->
+  <footer>
+    <div class="contact">
+      <a href="firstPage.html" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a>
+      <a href="secondPage.html" target="_blank"><i class="fa-brands fa-linkedin"></i>Linked-In</a>
+      <a href="secondPage.html" target="_blank"><i class="fa-brands fa-facebook"></i>Facebook</a>
+      <a href="secondPage.html" target="_blank"><i class="fa-brands fa-Instagram"></i>Instagram</a>
+      <a href="secondPage.html" target="_blank"><i class="fa-brands fa-Badoo"></i>Badoo</a>
+      <a href="secondPage.html" target="_blank"><i class="fa-brands fa-X"></i>X</a>
+      <p>&copy; 2026 A.U Bobbohari. All right reserved.</p>
+    </div>
+  </footer>
+
+  <script src="portfolio.js"></script>
+</body>
+
+</html>

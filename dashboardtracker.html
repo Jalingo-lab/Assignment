@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSE Operations Command Center - Dashboard</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #0284c7;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Sidebar */
+        aside { width: 260px; background-color: var(--primary); color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 24px; font-size: 1.1rem; font-weight: bold; border-bottom: 1px solid #1e293b; display: flex; align-items: center; gap: 10px; }
+        .sidebar-header span { color: var(--accent); }
+        .sidebar-menu { list-style: none; padding: 20px 0; flex: 1; }
+        .sidebar-menu li { padding: 12px 24px; font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 12px; }
+        .sidebar-menu li:hover, .sidebar-menu li.active { background-color: #1e293b; border-left: 4px solid var(--secondary); color: white; }
+        
+        /* Main Container */
+        .main-container { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        header { background: var(--card-bg); padding: 16px 32px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .header-title h1 { font-size: 1.4rem; color: var(--primary); }
+        .header-title p { font-size: 0.85rem; color: var(--text-light); }
+        .user-profile { display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 40px; height: 40px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: font-weight: bold; }
+
+        /* Dashboard Content */
+        .content { padding: 24px 32px; display: flex; flex-direction: column; gap: 24px; }
+        
+        /* Metrics Grid */
+        .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .metric-card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-left: 4px solid var(--secondary); }
+        .metric-card.warning { border-left-color: var(--accent); }
+        .metric-card.danger { border-left-color: var(--danger); }
+        .metric-card.success { border-left-color: var(--success); }
+        .metric-title { font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; font-weight: 600; }
+        .metric-value { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin-top: 8px; }
+        .metric-sub { font-size: 0.8rem; color: var(--text-light); margin-top: 4px; }
+
+        /* Tables & Widgets */
+        .panel { background: var(--card-bg); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .panel-header h3 { font-size: 1.1rem; color: var(--primary); }
+        
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+        th, td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; }
+        th { background-color: #f8fafc; color: var(--text-light); font-weight: 600; }
+        
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-block; }
+        .badge.critical { background: #fee2e2; color: #991b1b; }
+        .badge.warning { background: #fef3c7; color: #92400e; }
+        .badge.success { background: #d1fae5; color: #065f46; }
+
+        .btn { background: var(--secondary); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 600; }
+        .btn:hover { background: #0369a1; }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside>
+        <div class="sidebar-header">
+            <span>🛡️</span> HSE Command Center
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active">📊 Overview Dashboard</li>
+            <li>👷 Worker & Certifications</li>
+            <li>⚠️ Incident & Near-Miss Logs</li>
+            <li>🔄 Shift Roster & Compliance</li>
+            <li>📈 CAPA & Audit Reports</li>
+            <li>⚙️ System Settings</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <header>
+            <div class="header-title">
+                <h1>Offshore Platform Alpha - Safety Dashboard</h1>
+                <p>Real-time workforce compliance & incident tracking (ISO 45001 Compliant)</p>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">UAB</div>
+                <div>
+                    <div style="font-weight: 600; font-size: 0.9rem;">Usman Bobbohari</div>
+                    <div style="font-size: 0.75rem; color: var(--text-light);">Lead HSE Officer</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Metrics Row -->
+            <div class="metrics-grid">
+                <div class="metric-card success">
+                    <div class="metric-title">Active Compliant Workers</div>
+                    <div class="metric-value">248 / 260</div>
+                    <div class="metric-sub">95.4% certification compliance rate</div>
+                </div>
+                <div class="metric-card warning">
+                    <div class="metric-title">Expiring Certifications</div>
+                    <div class="metric-value">12</div>
+                    <div class="metric-sub">Due for renewal within 30 days</div>
+                </div>
+                <div class="metric-card danger">
+                    <div class="metric-title">Open Incidents</div>
+                    <div class="metric-value">3</div>
+                    <div class="metric-sub">2 Under Investigation, 1 CAPA Pending</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Safe Operating Hours</div>
+                    <div class="metric-value">142,850</div>
+                    <div class="metric-sub">Zero LTI (Lost Time Injury) recorded YTD</div>
+                </div>
+            </div>
+
+            <!-- Active Incidents Table Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>Recent Safety Incidents & Near-Miss Reports</h3>
+                    <button class="btn">+ Log New Incident</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Incident ID</th>
+                            <th>Location</th>
+                            <th>Category</th>
+                            <th>Severity</th>
+                            <th>Reported By</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#INC-2026-089</td>
+                            <td>Rig Floor Alpha</td>
+                            <td>Equipment / LOTO</td>
+                            <td><span class="badge critical">High</span></td>
+                            <td>Ibrahim S.</td>
+                            <td><span class="badge warning">Under Investigation</span></td>
+                        </tr>
+                        <tr>
+                            <td>#INC-2026-088</td>
+                            <td>Living Quarters B</td>
+                            <td>Slip / Trip Hazard</td>
+                            <td><span class="badge warning">Medium</span></td>
+                            <td>Aminu M.</td>
+                            <td><span class="badge success">CAPA Resolved</span></td>
+                        </tr>
+                        <tr>
+                            <td>#INC-2026-087</td>
+                            <td>Pipeline Manifold 3</td>
+                            <td>Gas Leak (Minor)</td>
+                            <td><span class="badge critical">Critical</span></td>
+                            <td>Chinedu O.</td>
+                            <td><span class="badge warning">Pending Audit Sign-off</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Certification Expiry Alerts Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>Critical Certification Expiry Watchlist (Next 30 Days)</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Worker Name</th>
+                            <th>Role / Department</th>
+                            <th>Certification Type</th>
+                            <th>Expiry Date</th>
+                            <th>Action Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Usman Bobbohari</td>
+                            <td>Senior Wellhead Engineer</td>
+                            <td>BOSIET (Basic Offshore Safety)</td>
+                            <td>12-Nov-2026</td>
+                            <td><span class="badge critical">Renewal Required</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kabiru Bello</td>
+                            <td>Rig Instrumentation Tech</td>
+                            <td>HUET & Helicopter Safety</td>
+                            <td>18-Nov-2026</td>
+                            <td><span class="badge warning">Scheduled for Training</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <p id="name">Name:</p>
+    <button id="button">Button</button>
+    <button id="styleButton">Style Button</button>
+    <button id="clearbutton">Clear Button</button>
+
+    <script>
+        let p = document.getElementById("name")
+        let button = document.getElementById("button")
+
+        button.addEventListener("click", function () {
+            let username = prompt("enter your name");
+            p.innerHTML = username;
+
+        });
+
+        styleButton.addEventListener("click", function () {
+            p.style.color = 'white'
+            p.style.backgroundColor = 'red'
+            p.style.borderRadius = "20px"
+            p.style.padding = "20px"
+        });
+    </script>
+
+</body>
+
+</html>

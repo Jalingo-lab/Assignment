@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Asset Tracking System</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #1f4bd8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h2,
+        h3 {
+            margin-bottom: 15px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #1f4bd8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #1739a5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .low {
+            color: red;
+            font-weight: bold;
+        }
+
+        .ok {
+            color: green;
+            font-weight: bold;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .stat {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat i {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1f4bd8;
+        }
+
+        .actions button {
+            width: auto;
+            padding: 8px 12px;
+            margin-right: 5px;
+        }
+
+        .danger {
+            background: crimson;
+        }
+
+        .secondary {
+            background: gray;
+        }
+
+        .search-box {
+            margin-bottom: 10px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #222;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            display: none;
+            z-index: 999;
+        }
+
+        .dark-mode {
+            background: #121212;
+            color: white;
+        }
+
+        .dark-mode .card,
+        .dark-mode .stat,
+        .dark-mode .topbar {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        @media(max-width:768px) {
+
+            .container,
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <i class="fa-solid fa-boxes-stacked"></i>
+        Advanced Asset Tracking System
+    </header>
+
+    <div class="topbar">
+        <div>
+            <strong>Admin Dashboard</strong>
+        </div>
+
+        <button onclick="toggleDarkMode()" style="width:auto;">
+            <i class="fa-solid fa-moon"></i> Toggle Dark Mode
+        </button>
+    </div>
+
+    <!-- DASHBOARD STATS -->
+    <div class="dashboard">
+
+        <div class="stat">
+            <i class="fa-solid fa-box"></i>
+            <h2 id="totalAssets">0</h2>
+            <p>Total Assets</p>
+        </div>
+
+        <div class="stat">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h2 id="lowStock">0</h2>
+            <p>Low Stock</p>
+        </div>
+
+        <div class="stat">
+            <i class="fa-solid fa-layer-group"></i>
+            <h2 id="categories">0</h2>
+            <p>Categories</p>
+        </div>
+
+        <div class="stat">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <h2 id="recentItem">0</h2>
+            <p>Recent Additions</p>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <!-- ADD ASSET -->
+        <div class="card">
+            <h3>Add / Scan Asset</h3>
+
+            <input type="text" id="assetName" placeholder="Asset Name">
+
+            <input type="text" id="assetCode" placeholder="Barcode / RFID">
+
+            <input type="number" id="assetQty" placeholder="Quantity">
+
+            <select id="assetCategory">
+                <option value="">Select Category</option>
+                <option>Electronics</option>
+                <option>Tools</option>
+                <option>Vehicles</option>
+                <option>Office Equipment</option>
+            </select>
+
+            <button onclick="addAsset()">
+                <i class="fa-solid fa-plus"></i>
+                Add Asset
+            </button>
+        </div>
+
+        <!-- INVENTORY -->
+        <div class="card">
+            <h3>Inventory Dashboard</h3>
+
+            <input type="text" id="searchBox" class="search-box" placeholder="Search assets..."
+                onkeyup="searchAssets()">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asset</th>
+                        <th>Code</th>
+                        <th>Category</th>
+                        <th>Qty</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="inventoryTable"></tbody>
+            </table>
+        </div>
+
+        <!-- PREDICTIONS -->
+        <div class="card">
+            <h3>Predictive Reordering</h3>
+            <button onclick="checkReorder()">
+                Run Prediction
+            </button>
+
+            <div id="predictionResult"></div>
+        </div>
+
+        <!-- EXPORT -->
+        <div class="card">
+            <h3>Export Reports</h3>
+
+            <button onclick="exportCSV()">
+                <i class="fa-solid fa-file-csv"></i>
+                Export CSV
+            </button>
+
+            <button onclick="window.print()">
+                <i class="fa-solid fa-print"></i>
+                Print Report
+            </button>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div class="card" style="grid-column: span 2;">
+            <h3>Inventory Analytics</h3>
+            <canvas id="assetChart"></canvas>
+        </div>
+
+        <!-- ACTIVITY LOG -->
+        <div class="card" style="grid-column: span 2;">
+            <h3>Asset Activity Logs</h3>
+            <div id="logs"></div>
+        </div>
+
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+
+        let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+        let logs = JSON.parse(localStorage.getItem("logs")) || [];
+
+        function showToast(message) {
+            let toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.style.display = "block";
+
+            setTimeout(() => {
+                toast.style.display = "none";
+            }, 3000);
+        }
+
+        function saveData() {
+            localStorage.setItem("inventory", JSON.stringify(inventory));
+            localStorage.setItem("logs", JSON.stringify(logs));
+        }
+
+        // Add Asset
+        function addAsset() {
+
+            let name = document.getElementById("assetName").value.trim();
+            let code = document.getElementById("assetCode").value.trim();
+            let qty = parseInt(document.getElementById("assetQty").value);
+            let category = document.getElementById("assetCategory").value;
+
+            if (!name || !code || qty <= 0 || !category) {
+                return alert("Please fill all fields correctly");
+            }
+
+            let date = new Date().toLocaleString();
+
+            inventory.push({
+                name,
+                code,
+                qty,
+                category,
+                date
+            });
+
+            logs.push(`Added ${name} (${qty}) on ${date}`);
+
+            saveData();
+
+            renderTable();
+            renderStats();
+            renderLogs();
+            renderChart();
+
+            showToast("Asset Added Successfully");
+
+            document.getElementById("assetName").value = "";
+            document.getElementById("assetCode").value = "";
+            document.getElementById("assetQty").value = "";
+            document.getElementById("assetCategory").value = "";
+        }
+
+        // Render Table
+        function renderTable(filtered = inventory) {
+
+            let table = document.getElementById("inventoryTable");
+            table.innerHTML = "";
+
+            filtered.forEach((item, index) => {
+
+                let status = item.qty < 5 ? "Low Stock" : "OK";
+
+                table.innerHTML += `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.code}</td>
+                    <td>${item.category}</td>
+                    <td>${item.qty}</td>
+                    <td class="${item.qty < 5 ? 'low' : 'ok'}">${status}</td>
+
+                    <td class="actions">
+
+                        <button onclick="editAsset(${index})">
+                            Edit
+                        </button>
+
+                        <button class="danger" onclick="deleteAsset(${index})">
+                            Delete
+                        </button>
+
+                    </td>
+                </tr>
+                `;
+            });
+        }
+
+        // Edit Asset
+        function editAsset(index) {
+
+            let newQty = prompt("Enter New Quantity", inventory[index].qty);
+
+            if (newQty !== null) {
+                inventory[index].qty = parseInt(newQty);
+
+                logs.push(`Updated ${inventory[index].name} quantity to ${newQty}`);
+
+                saveData();
+                renderTable();
+                renderStats();
+                renderLogs();
+                renderChart();
+
+                showToast("Asset Updated");
+            }
+        }
+
+        // Delete Asset
+        function deleteAsset(index) {
+
+            logs.push(`Deleted ${inventory[index].name}`);
+
+            inventory.splice(index, 1);
+
+            saveData();
+            renderTable();
+            renderStats();
+            renderLogs();
+            renderChart();
+
+            showToast("Asset Deleted");
+        }
+
+        // Search Assets
+        function searchAssets() {
+
+            let search = document.getElementById("searchBox").value.toLowerCase();
+
+            let filtered = inventory.filter(item =>
+                item.name.toLowerCase().includes(search) ||
+                item.code.toLowerCase().includes(search)
+            );
+
+            renderTable(filtered);
+        }
+
+        // Predictive Reorder
+        function checkReorder() {
+
+            let result = document.getElementById("predictionResult");
+            result.innerHTML = "";
+
+            let alerts = inventory.filter(item => item.qty < 5);
+
+            if (alerts.length === 0) {
+                result.innerHTML = "<p>✅ All stock levels are healthy</p>";
+                return;
+            }
+
+            alerts.forEach(item => {
+
+                result.innerHTML += `
+                <p class="low">
+                    ⚠ Reorder Suggested: ${item.name} (${item.code})
+                </p>
+                `;
+            });
+
+            showToast("Low Stock Detected");
+        }
+
+        // Stats
+        function renderStats() {
+
+            document.getElementById("totalAssets").innerText = inventory.length;
+
+            let lowStock = inventory.filter(item => item.qty < 5).length;
+            document.getElementById("lowStock").innerText = lowStock;
+
+            let categories = [...new Set(inventory.map(item => item.category))].length;
+            document.getElementById("categories").innerText = categories;
+
+            document.getElementById("recentItem").innerText = inventory.length;
+        }
+
+        // Logs
+        function renderLogs() {
+
+            let logBox = document.getElementById("logs");
+            logBox.innerHTML = "";
+
+            logs.slice().reverse().forEach(log => {
+                logBox.innerHTML += `<p>• ${log}</p>`;
+            });
+        }
+
+        // Export CSV
+        function exportCSV() {
+
+            let csv = "Name,Code,Category,Quantity,Date\n";
+
+            inventory.forEach(item => {
+                csv += `${item.name},${item.code},${item.category},${item.qty},${item.date}\n`;
+            });
+
+            let blob = new Blob([csv], { type: 'text/csv' });
+            let a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'inventory_report.csv';
+            a.click();
+
+            showToast("CSV Exported");
+        }
+
+        // Chart
+        let chart;
+
+        function renderChart() {
+
+            let categories = {};
+
+            inventory.forEach(item => {
+                categories[item.category] = (categories[item.category] || 0) + item.qty;
+            });
+
+            let ctx = document.getElementById('assetChart').getContext('2d');
+
+            if (chart) chart.destroy();
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [{
+                        label: 'Assets by Category',
+                        data: Object.values(categories)
+                    }]
+                }
+            });
+        }
+
+        // Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        // Initial Load
+        renderTable();
+        renderStats();
+        renderLogs();
+        renderChart();
+
+    </script>
+
+</body>
+
+</html>

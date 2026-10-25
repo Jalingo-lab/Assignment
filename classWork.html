@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .subscribeBtn {
+                background-color: red;
+                color: white;
+                padding: 10px;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+            }
+
+            .unsubscribeBtn {
+                background-color: black;
+                color: white;
+                padding: 10px;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <p>Subscribe to this channel</p>
+        <div id="div"></div>
+
+        <script>
+            let div = document.querySelector("#div");
+            div.innerHTML = '<button class="subscribeBtn"> Subscribe </button>';
+            let subscribeBtn = document.querySelector(".subscribeBtn");
+            subscribeBtn.addEventListener("click", function () {
+                if (subscribeBtn.textContent === "Subscribe") {
+                    subscribeBtn.textContent = "Unsubscribe";
+                    subscribeBtn.classList.add("unsubscribeBtn");
+                    subscribeBtn.classList.remove("subscribeBtn");
+
+                } else {
+                    subscribeBtn.textContent = "Subscribe";
+                    subscribeBtn.classList.add("subscribeBtn");
+                    subscribeBtn.classList.remove("unsubscribeBtn");
+                    
+                }
+            })
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>

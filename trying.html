@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance System</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #0f172a;
+            color: #fff
+        }
+
+        header {
+            background: #000;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        nav button {
+            margin-left: 10px;
+            padding: 8px 12px;
+            background: #ffb700;
+            border: none;
+            cursor: pointer;
+            font-weight: bold
+        }
+
+        .section {
+            display: none;
+            padding: 20px
+        }
+
+        .active {
+            display: block
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 10px
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%
+        }
+
+        button {
+            background: #ffb700;
+            border: none;
+            font-weight: bold;
+            cursor: pointer
+        }
+
+        .alert {
+            padding: 10px;
+            background: #991b1b;
+            margin-top: 10px;
+            border-radius: 5px
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>⚡ Predictive Maintenance System</h2>
+        <nav>
+            <button onclick="show('home')">Home</button>
+            <button onclick="show('dashboard')">Dashboard</button>
+            <button onclick="show('alertsPage')">Alerts</button>
+            <button onclick="show('schedulePage')">Schedule</button>
+        </nav>
+    </header>
+
+    <!-- HOME -->
+    <div id="home" class="section active">
+        <h1>Welcome</h1>
+        <p>This system monitors oil rig equipment and predicts failures using health scores.</p>
+        <button onclick="show('dashboard')">Go to Dashboard</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section">
+        <div class="grid">
+
+            <div class="card">
+                <h3>Equipment Data Input</h3>
+                <input id="name" placeholder="Machine / Rig Name">
+                <input id="load" type="number" placeholder="Load (units)">
+                <input id="temp" type="number" placeholder="Temperature (°C)">
+                <input id="vib" type="number" placeholder="Vibration Level">
+                <button onclick="addMachine()">Add Machine</button>
+            </div>
+
+            <div class="card">
+                <h3>Health Score Chart</h3>
+                <canvas id="chart"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ALERTS -->
+    <div id="alertsPage" class="section">
+        <h3>Failure Alerts</h3>
+        <div id="alerts"></div>
+    </div>
+
+    <!-- SCHEDULE -->
+    <div id="schedulePage" class="section">
+        <h3>Maintenance Schedule</h3>
+        <ul id="schedule"></ul>
+    </div>
+
+    <script>
+        let machines = JSON.parse(localStorage.getItem('machines')) || [];
+
+        const chart = new Chart(document.getElementById('chart'), {
+            type: 'bar',
+            data: { labels: [], datasets: [{ label: 'Health Score', data: [] }] }
+        });
+
+        function show(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+        }
+
+        function healthScore(m) {
+            let score = 100;
+            if (m.temp > 90) score -= 30;
+            if (m.temp > 110) score -= 20;
+            if (m.vib > 7) score -= 25;
+            if (m.load > 80) score -= 15;
+            return Math.max(0, score);
+        }
+
+        function status(score) {
+            if (score < 40) return "HIGH";
+            if (score < 70) return "MEDIUM";
+            return "LOW";
+        }
+
+        function recommendation(score) {
+            if (score < 40) return "Immediate maintenance required";
+            if (score < 70) return "Schedule inspection soon";
+            return "Normal operation";
+        }
+
+        function addMachine() {
+            const name = document.getElementById('name').value;
+            const load = parseFloat(document.getElementById('load').value);
+            const temp = parseFloat(document.getElementById('temp').value);
+            const vib = parseFloat(document.getElementById('vib').value);
+
+            if (!name || isNaN(load) || isNaN(temp) || isNaN(vib)) {
+                alert('Fill all fields'); return;
+            }
+
+            machines.push({ name, load, temp, vib });
+            update();
+
+            document.getElementById('name').value = '';
+            document.getElementById('load').value = '';
+            document.getElementById('temp').value = '';
+            document.getElementById('vib').value = '';
+        }
+
+        function update() {
+            chart.data.labels = machines.map(m => m.name);
+            chart.data.datasets[0].data = machines.map(m => healthScore(m));
+            chart.update();
+
+            let alerts = document.getElementById('alerts');
+            let schedule = document.getElementById('schedule');
+            alerts.innerHTML = '';
+            schedule.innerHTML = '';
+
+            machines.forEach(m => {
+                let score = healthScore(m);
+                let st = status(score);
+
+                if (st === "HIGH") {
+                    alerts.innerHTML += `<div class='alert'>⚠️ ${m.name} - Critical Failure Risk!</div>`;
+                }
+
+                schedule.innerHTML += `<li>${m.name} → ${recommendation(score)}</li>`;
+            });
+
+            localStorage.setItem('machines', JSON.stringify(machines));
+        }
+
+        update();
+    </script>
+
+</body>
+
+</html>
